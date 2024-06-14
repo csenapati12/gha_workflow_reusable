@@ -1,0 +1,30 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      json_input:
+        description: 'A JSON input'
+        required: true
+        type: string
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Parse JSON input
+        id: parse_json
+        run: |
+          echo '${{ inputs.json_input }}' | jq '.' > parsed.json
+          key1=$(jq -r '.key1' parsed.json)
+          key2=$(jq -r '.key2' parsed.json)
+          echo "::set-output name=key1::$key1"
+          echo "::set-output name=key2::$key2"
+
+      - name: Use parsed JSON values
+        run: |
+          echo "Key1: ${{ steps.parse_json.outputs.key1 }}"
+          echo "Key2: ${{ steps.parse_json.outputs.key2 }}"
