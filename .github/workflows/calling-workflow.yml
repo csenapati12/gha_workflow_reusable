@@ -1,0 +1,12 @@
+name: Calling Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-reusable-workflow:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      json_input: '{"key1": "value1", "key2": "value2"}'
