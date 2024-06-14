@@ -1,12 +1,15 @@
 name: Calling Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      json_input: 
+        required: true
+        type: string
+        default: '{"key1": "value1", "key2": "value2"}'
 
 jobs:
   call-reusable-workflow:
     uses: ./.github/workflows/reusable-workflow.yml
     with:
-      json_input: '{"key1": "value1", "key2": "value2"}'
+      json_input: ${{ inputs.json_input }}
