@@ -23,7 +23,7 @@ jobs:
           key2=$(jq -r '.key2' parsed.json)
           echo "::set-output name=key1::$key1"
           echo "::set-output name=key2::$key2"
-      - name: Json value
+      - name: Json value from the userpayload
         run: cat parsed.json
         
       - name: Use parsed JSON values
