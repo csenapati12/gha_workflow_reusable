@@ -26,6 +26,9 @@ jobs:
       - name: Json value from the userpayload
         run: cat parsed.json
         
+      - name: create connector command
+        run: ./connector.sh parsed.json
+        
       - name: Use parsed JSON values
         run: |
           echo "Key1: ${{ steps.parse_json.outputs.key1 }}"
